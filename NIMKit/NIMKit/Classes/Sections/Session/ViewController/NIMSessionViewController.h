@@ -195,4 +195,10 @@
  */
 - (void)uiUpdateMessage:(NIMMessage *)message;
 
+- (void)onTapMediaItemPicture:(nullable NIMMediaItem *)item;
+
+- (void)onTapMediaItemShoot:(nullable NIMMediaItem *)item;
+
+- (void)onTapMediaItemLocation:(nullable NIMMediaItem *)item;
+
 @end

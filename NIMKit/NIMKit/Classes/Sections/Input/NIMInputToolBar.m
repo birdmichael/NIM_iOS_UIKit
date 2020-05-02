@@ -12,13 +12,14 @@
 #import "UIImage+NIMKit.h"
 #import "NIMInputBarItemType.h"
 
+#import "NIMInputToolBar+Custom.h"
+
 @interface NIMInputToolBar()<NIMGrowingTextViewDelegate>
 
 @property (nonatomic,copy)  NSArray<NSNumber *> *types;
 
 @property (nonatomic,copy)  NSDictionary *dict;
 
-@property (nonatomic,strong) NIMGrowingTextView *inputTextView;
 
 @property (nonatomic,assign) NIMInputStatus status;
 
@@ -68,11 +69,11 @@
         _inputTextView.returnKeyType = UIReturnKeySend;
         
         //顶部分割线
-        UIView *sep = [[UIView alloc] initWithFrame:CGRectZero];
-        sep.backgroundColor = [UIColor lightGrayColor];
-        sep.nim_size = CGSizeMake(self.nim_width, .5f);
-        sep.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        [self addSubview:sep];
+        _topSep = [[UIView alloc] initWithFrame:CGRectZero];
+        _topSep.backgroundColor = [UIColor lightGrayColor];
+        _topSep.nim_size = CGSizeMake(self.nim_width, .5f);
+        _topSep.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self addSubview:_topSep];
         
         //底部分割线
         _bottomSep = [[UIView alloc] initWithFrame:CGRectZero];
@@ -126,6 +127,9 @@
         //得到 ToolBar 自身高度
         viewHeight = viewHeight + 2 * self.spacing + 2 * self.textViewPadding;
     }
+    if (self.bottomStack.nim_height > 0) {
+        viewHeight += self.bottomStack.nim_height + self.spacing;
+    }
     
     return CGSizeMake(size.width,viewHeight);
 }
@@ -161,11 +165,13 @@
         }
         
         view.nim_left = left + self.spacing;
-        view.nim_centerY = self.nim_height * .5f;
+        view.nim_top = self.textViewPadding;
         left = view.nim_right;
     }
     
     [self adjustTextAndRecordView];
+    
+    [self layoutStackView];
     
     //底部分割线
     CGFloat sepHeight = .5f;
@@ -302,7 +308,7 @@
 
 - (void)didChangeHeight:(CGFloat)height
 {
-    self.nim_height = height + 2 * self.spacing + 2 * self.textViewPadding;
+    self.nim_height = height + 2 * self.spacing + 2 * self.textViewPadding + self.bottomStack.nim_height;
     if ([self.delegate respondsToSelector:@selector(toolBarDidChangeHeight:)]) {
         [self.delegate toolBarDidChangeHeight:self.nim_height];
     }

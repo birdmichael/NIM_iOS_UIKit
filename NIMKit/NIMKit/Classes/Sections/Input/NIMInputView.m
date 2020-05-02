@@ -23,6 +23,7 @@
 #import "NIMKitKeyboardInfo.h"
 #import "NSString+NIMKit.h"
 
+
 @interface NIMInputView()<NIMInputToolBarDelegate,NIMInputEmoticonProtocol,NIMContactSelectDelegate>
 {
     UIView  *_emoticonView;
@@ -92,7 +93,7 @@
         }
            break;
     }
-    CGFloat height = toolBarHeight + containerHeight;
+    CGFloat height = toolBarHeight + containerHeight ;
     CGFloat width = self.superview? self.superview.nim_width : self.nim_width;
     return CGSizeMake(width, height);
 }

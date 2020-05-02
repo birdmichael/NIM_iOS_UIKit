@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger,NIMInputStatus)
 @end
 
 
+@class NIMGrowingTextView;
 @interface NIMInputToolBar : UIView
 
 @property (nonatomic,strong) UIButton    *voiceButton;
@@ -46,7 +47,13 @@ typedef NS_ENUM(NSInteger,NIMInputStatus)
 
 @property (nonatomic,strong) UIButton    *recordButton;
 
+@property (nonatomic,strong) NIMGrowingTextView *inputTextView;
+
 @property (nonatomic,strong) UIImageView *inputTextBkgImage;
+
+@property (nonatomic, strong, nullable) UIView  *bottomStack;
+
+@property (nonatomic,strong) UIView *topSep;
 
 @property (nonatomic,strong) UIView *bottomSep;
 
