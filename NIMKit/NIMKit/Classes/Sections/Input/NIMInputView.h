@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, NIMAudioRecordPhase) {
 @property (strong, nonatomic)  NIMInputToolBar *toolBar;
 @property (strong, nonatomic)  UIView *moreContainer;
 @property (strong, nonatomic)  UIView *emoticonContainer;
+@property (strong, nonatomic)  UIView *customAudioVieoContainer;
 
 @property (nonatomic, assign) NIMInputStatus status;
 @property (nonatomic, strong) NIMInputAtCache *atCache;
@@ -67,6 +68,6 @@ typedef NS_ENUM(NSInteger, NIMAudioRecordPhase) {
 - (void)updateVoicePower:(float)power;
 
 
-- (void)onTouchVoiceBtn:(id)sender;
+- (void)onTouchCustomVoiceBtn:(id)sender;
 
 @end

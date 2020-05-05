@@ -93,6 +93,16 @@
     return image;
 }
 
++ (UIImage *)nim_customImageInKit:(NSString *)imageName {
+    NSBundle *bundle = [NIMKit sharedKit].customBundle;
+    UIImage *image = [UIImage imageNamed:imageName inBundle:bundle compatibleWithTraitCollection:nil];
+    if (!image) {
+        image = [UIImage imageNamed:imageName];
+    }
+    //NSAssert(image != nil, @"nim_imageInKit return nil!");
+    return image;
+}
+
 + (UIImage *)nim_emoticonInKit:(NSString *)imageName {
     NSBundle *bundle = [NIMKit sharedKit].emoticonBundle;
     NSString *name = [NIMKit_EmojiPath stringByAppendingPathComponent:imageName];

@@ -117,6 +117,7 @@
             inputViewUp = NO;
             break;
         case NIMInputStatusMore:
+        case NIMInputStatusCustomAudio:
         case NIMInputStatusEmoticon:
             inputViewUp = YES;
         default:

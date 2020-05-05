@@ -22,11 +22,13 @@
 #import "NIMKitInfoFetchOption.h"
 #import "NIMKitKeyboardInfo.h"
 #import "NSString+NIMKit.h"
+#import "CWVoiceView.h"
 
 
 @interface NIMInputView()<NIMInputToolBarDelegate,NIMInputEmoticonProtocol,NIMContactSelectDelegate>
 {
     UIView  *_emoticonView;
+    UIView  *_customAudioVieoContainer;
 }
 
 @property (nonatomic, strong) NIMInputAudioRecordIndicatorView *audioRecordIndicator;
@@ -44,6 +46,7 @@
 
 @synthesize emoticonContainer = _emoticonContainer;
 @synthesize moreContainer = _moreContainer;
+@synthesize customAudioVieoContainer = _customAudioVieoContainer;
 
 - (instancetype)initWithFrame:(CGRect)frame
                        config:(id<NIMSessionConfig>)config
@@ -74,6 +77,9 @@
     {
         case NIMInputStatusEmoticon:
             containerHeight = _emoticonContainer.nim_height;
+            break;
+        case NIMInputStatusCustomAudio:
+            containerHeight = _customAudioVieoContainer.nim_height;
             break;
         case NIMInputStatusMore:
             containerHeight = _moreContainer.nim_height;
@@ -123,6 +129,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.moreContainer.hidden = status != NIMInputStatusMore;
         self.emoticonContainer.hidden = status != NIMInputStatusEmoticon;
+        self.customAudioVieoContainer.hidden = status != NIMInputStatusCustomAudio;
     });
 }
 
@@ -245,6 +252,33 @@
     }
 }
 
+- (void)checkCustomAudioContainer
+{
+    if (!_customAudioVieoContainer) {
+        CWVoiceView *customAudioVieoContainer = [[CWVoiceView alloc] initWithFrame:CGRectMake(0, 0, self.nim_width, 252)];
+        
+//        customAudioVieoContainer.nim_size = [emoticonContainer sizeThatFits:CGSizeMake(self.nim_width, CGFLOAT_MAX)];
+        customAudioVieoContainer.nim_size = CGSizeMake(self.nim_width, 250);
+        customAudioVieoContainer.backgroundColor = [UIColor whiteColor];
+        customAudioVieoContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//        customAudioVieoContainer.delegate = self;
+        customAudioVieoContainer.hidden = YES;
+        
+        _customAudioVieoContainer = customAudioVieoContainer;
+    }
+    
+    //可能是外部主动设置进来的，统一放在这里添加 subview
+    if (!_customAudioVieoContainer.superview)
+    {
+        [self addSubview:_customAudioVieoContainer];
+    }
+}
+
+- (void)setCustomAudioVieoContainer:(UIView *)customAudioVieoContainer {
+    _customAudioVieoContainer = customAudioVieoContainer;
+    [self sizeToFit];
+}
+
 - (void)setEmoticonContainer:(UIView *)emoticonContainer
 {
     _emoticonContainer = emoticonContainer;
@@ -297,7 +331,7 @@
 {
     if (_inputDelegate && [_inputDelegate respondsToSelector:@selector(didChangeInputHeight:)])
     {
-        if (self.status == NIMInputStatusMore || self.status == NIMInputStatusEmoticon || self.status == NIMInputStatusAudio)
+        if (self.status == NIMInputStatusMore || self.status == NIMInputStatusEmoticon || self.status == NIMInputStatusAudio || self.status == NIMInputStatusCustomAudio)
         {
             //这个时候需要一个动画来模拟键盘
             [UIView animateWithDuration:0.25 delay:0 options:7 animations:^{
@@ -317,6 +351,7 @@
     //这里不做.语法 get 操作，会提前初始化组件导致卡顿
     _moreContainer.nim_top     = self.toolBar.nim_bottom;
     _emoticonContainer.nim_top = self.toolBar.nim_bottom;
+    _customAudioVieoContainer.nim_top = self.toolBar.nim_bottom;
 }
 
 
@@ -362,6 +397,53 @@
     }
 }
 
+- (void)onTouchCustomVoiceBtn:(id)sender {
+    if (self.status!= NIMInputStatusCustomAudio) {
+        if ([self.actionDelegate respondsToSelector:@selector(onTapVoiceBtn:)]) {
+            [self.actionDelegate onTapVoiceBtn:sender];
+        }
+        __weak typeof(self) weakSelf = self;
+        if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)]) {
+            [[AVAudioSession sharedInstance] performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self checkCustomAudioContainer];
+                        [self bringSubviewToFront:self.customAudioVieoContainer];
+                        [self.customAudioVieoContainer setHidden:NO];
+                        [self.emoticonContainer setHidden:YES];
+                        [self.moreContainer setHidden:YES];
+                        [self refreshStatus:NIMInputStatusCustomAudio];
+                        [self sizeToFit];
+                        if (self.toolBar.showsKeyboard)
+                        {
+                            self.toolBar.showsKeyboard = NO;
+                        }
+                    });
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[[UIAlertView alloc] initWithTitle:nil
+                                                    message:@"没有麦克风权限".nim_localized
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确定".nim_localized
+                                          otherButtonTitles:nil] show];
+                    });
+                }
+            }];
+        }
+    }
+    else
+    {
+        if ([self.toolBar.inputBarItemTypes containsObject:@(NIMInputBarItemTypeTextAndRecord)])
+        {
+            [self refreshStatus:NIMInputStatusText];
+            self.toolBar.showsKeyboard = YES;
+        }
+    }
+}
+
+
 - (IBAction)onTouchRecordBtnDown:(id)sender {
     self.recordPhase = AudioRecordPhaseStart;
 }
@@ -394,6 +476,7 @@
         [self bringSubviewToFront:self.emoticonContainer];
         [self.emoticonContainer setHidden:NO];
         [self.moreContainer setHidden:YES];
+        [self.customAudioVieoContainer setHidden:YES];
         [self refreshStatus:NIMInputStatusEmoticon];
         [self sizeToFit];
         
@@ -420,6 +503,7 @@
         [self bringSubviewToFront:self.moreContainer];
         [self.moreContainer setHidden:NO];
         [self.emoticonContainer setHidden:YES];
+        [self.customAudioVieoContainer setHidden:YES];
         [self refreshStatus:NIMInputStatusMore];
         [self sizeToFit];
 

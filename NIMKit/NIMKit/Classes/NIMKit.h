@@ -106,6 +106,11 @@ FOUNDATION_EXPORT const unsigned char NIMKitVersionString[];
 @property (nonatomic, copy) NSBundle *emoticonBundle;
 
 /**
+ *  自定义资源所在的 bundle 名称。
+ */
+@property (nonatomic, copy) NSBundle *customBundle;
+
+/**
  *  NIMKit语言所在Bundle, 启动的时候根据系统语言会选择对应的语言包，后面用户可替换
  */
 @property (nonatomic, strong) NSBundle * languageBundle;

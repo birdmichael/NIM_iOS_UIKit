@@ -67,6 +67,13 @@ extern NSString *const NIMKitTeamInfoHasUpdatedNotification;
     return _resourceBundle;
 }
 
+- (NSBundle *)customBundle {
+    if (!_customBundle) {
+        _customBundle = [NSBundle custom_defaultResourceBundle];
+    }
+    return _customBundle;
+}
+
 - (NSBundle *)emoticonBundle {
     if (!_emoticonBundle) {
         _emoticonBundle = [NSBundle nim_defaultEmojiBundle];

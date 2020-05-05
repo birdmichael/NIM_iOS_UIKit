@@ -102,5 +102,30 @@
     return preferredLanguage;
 }
 
++ (NSBundle *)custom_defaultResourceBundle {
+    NSBundle *bundle = [NSBundle bundleForClass:[NIMKit class]];
+    NSURL *url = [bundle URLForResource:@"Custom" withExtension:@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithURL:url];
+    return resourceBundle;
+}
+
++ (NSString *)custom_ResourceImage:(NSString *)imageName {
+    NSBundle *bundle = [NIMKit sharedKit].resourceBundle;
+    NSString *ext = [imageName pathExtension];
+    if (ext.length == 0) {
+        ext = @"png";
+    }
+    NSString *name = [imageName stringByDeletingPathExtension];
+    NSString *doubleImage  = [name stringByAppendingString:@"@2x"];
+    NSString *tribleImage  = [name stringByAppendingString:@"@3x"];
+    NSString *path = nil;
+    if ([UIScreen mainScreen].scale == 3.0) {
+        path = [bundle pathForResource:tribleImage ofType:ext];
+    }
+    path = path ? path : [bundle pathForResource:doubleImage ofType:ext]; //取二倍图
+    path = path ? path : [bundle pathForResource:name ofType:ext]; //实在没了就去取一倍图
+    return path;
+}
+
 
 @end

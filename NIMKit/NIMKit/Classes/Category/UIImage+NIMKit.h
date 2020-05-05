@@ -19,6 +19,8 @@
 
 + (UIImage *)nim_imageInKit:(NSString *)imageName;
 
++ (UIImage *)nim_customImageInKit:(NSString *)imageName;
+
 + (UIImage *)nim_emoticonInKit:(NSString *)imageName;
 
 - (UIImage *)nim_imageForAvatarUpload;

@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)nim_EmojiImage:(NSString *)imageName;
 
++ (NSBundle *)custom_defaultResourceBundle;
+
++ (NSString *)custom_ResourceImage:(NSString *)imageName;
+
 @end
 
 NS_ASSUME_NONNULL_END

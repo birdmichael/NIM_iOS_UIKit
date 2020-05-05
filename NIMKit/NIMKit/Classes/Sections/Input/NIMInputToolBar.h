@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger,NIMInputStatus)
     NIMInputStatusText,
     NIMInputStatusAudio,
     NIMInputStatusEmoticon,
-    NIMInputStatusMore
+    NIMInputStatusMore,
+    NIMInputStatusCustomAudio = 99
 };
 
 
