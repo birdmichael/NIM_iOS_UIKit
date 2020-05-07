@@ -50,7 +50,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
-#include "STTypes.h"
+#include "STTypes.hpp"
 
 namespace soundtouch
 {

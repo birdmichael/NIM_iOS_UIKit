@@ -72,8 +72,8 @@
 #ifndef SoundTouch_H
 #define SoundTouch_H
 
-#include "FIFOSamplePipe.h"
-#include "STTypes.h"
+#include "FIFOSamplePipe.hpp"
+#include "STTypes.hpp"
 
 namespace soundtouch
 {

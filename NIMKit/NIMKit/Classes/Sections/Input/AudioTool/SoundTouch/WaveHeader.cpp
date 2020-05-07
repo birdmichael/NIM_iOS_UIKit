@@ -7,7 +7,7 @@
 //
 
 #include <stdlib.h>
-#include "WaveHeader.h"
+#include "WaveHeader.hpp"
 
 // wav头部结构体
 struct wave_header {

@@ -44,8 +44,8 @@
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
-#include "AAFilter.h"
-#include "FIRFilter.h"
+#include "AAFilter.hpp"
+#include "FIRFilter.hpp"
 
 using namespace soundtouch;
 

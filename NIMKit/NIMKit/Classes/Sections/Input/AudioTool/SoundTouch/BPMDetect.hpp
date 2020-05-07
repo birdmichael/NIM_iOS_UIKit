@@ -57,8 +57,8 @@
 #ifndef _BPMDetect_H_
 #define _BPMDetect_H_
 
-#include "STTypes.h"
-#include "FIFOSampleBuffer.h"
+#include "STTypes.hpp"
+#include "FIFOSampleBuffer.hpp"
 
 namespace soundtouch
 {

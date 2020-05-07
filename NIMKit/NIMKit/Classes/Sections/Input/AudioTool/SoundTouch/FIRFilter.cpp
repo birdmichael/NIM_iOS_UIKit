@@ -43,8 +43,8 @@
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
-#include "FIRFilter.h"
-#include "cpu_detect.h"
+#include "FIRFilter.hpp"
+#include "cpu_detect.hpp"
 
 using namespace soundtouch;
 

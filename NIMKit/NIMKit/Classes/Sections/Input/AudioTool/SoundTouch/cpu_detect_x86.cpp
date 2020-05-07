@@ -39,8 +39,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "cpu_detect.h"
-#include "STTypes.h"
+#include "cpu_detect.hpp"
+#include "STTypes.hpp"
 
 #if defined(SOUNDTOUCH_ALLOW_X86_OPTIMIZATIONS)
 

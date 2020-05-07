@@ -12,9 +12,18 @@ Pod::Spec.new do |s|
 
 
   s.subspec 'Full' do |cs|
-    cs.source_files  = 'NIMKit/NIMKit/Classes/**/*.{h,m}'
+    cs.source_files  = 'NIMKit/NIMKit/Classes/**/*.{h,m,mm,cpp}'
     cs.dependency 'NIMKit/Core'
     cs.dependency 'NIMSDK', '~> 7.5.0'
+
+    cs.exclude_files = 'NIMKit/NIMKit/Classes/Sections/Input/AudioTool/SoundTouch/**/*.{h,mm}'
+    cs.subspec 'no-arc' do |sp|
+      sp.source_files = 'NIMKit/NIMKit/Classes/Sections/Input/AudioTool/SoundTouch/**/*.{h,mm}'
+      sp.requires_arc = false
+    end
+    cs.public_header_files = 'NIMKit/NIMKit/Classes/Sections/Input/AudioTool/**/*.{h}'
+    cs.private_header_files = 'NIMKit/NIMKit/Classes/Sections/Input/AudioTool/**/*.{hpp}'
+    
   end
 
   s.subspec 'Lite' do |cs|
@@ -40,6 +49,8 @@ Pod::Spec.new do |s|
     cs.source_files  = 'NIMKit/NIMKit/Classes/**/*.{h,m}'
     cs.dependency 'NIMKit/Core_Free'
     cs.dependency 'NIMSDK', '~> 7.5.0'
+    cs.requires_arc = false
+    cs.requires_arc = ['NIMKit/NIMKit/Classes/**/*.mm']
   end
 
   s.subspec 'Lite_Free' do |cs|
@@ -59,8 +70,13 @@ Pod::Spec.new do |s|
 	os.dependency 'YYImage/WebP'
   end
 
+
+  s.subspec 'NSObject+Fuzz' do |cs|
+   cs.source_files = 'NIMKit/NIMKit/Classes/Sections/**/*.{h,mm}'
+  end
+
   
 
-  s.default_subspec = 'Lite'  
+  s.default_subspec = 'Lite'
 
-end 
+end

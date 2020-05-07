@@ -47,9 +47,9 @@
 #include <math.h>
 #include <float.h>
 
-#include "STTypes.h"
-#include "cpu_detect.h"
-#include "TDStretch.h"
+#include "STTypes.hpp"
+#include "cpu_detect.hpp"
+#include "TDStretch.hpp"
 
 #include <stdio.h>
 

@@ -58,9 +58,9 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
-#include "FIFOSampleBuffer.h"
-#include "PeakFinder.h"
-#include "BPMDetect.h"
+#include "FIFOSampleBuffer.hpp"
+#include "PeakFinder.hpp"
+#include "BPMDetect.hpp"
 
 using namespace soundtouch;
 

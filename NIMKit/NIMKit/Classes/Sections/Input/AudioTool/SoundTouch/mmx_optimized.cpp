@@ -48,7 +48,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "STTypes.h"
+#include "STTypes.hpp"
 
 #ifdef SOUNDTOUCH_ALLOW_MMX
 // MMX routines available only with integer sample type

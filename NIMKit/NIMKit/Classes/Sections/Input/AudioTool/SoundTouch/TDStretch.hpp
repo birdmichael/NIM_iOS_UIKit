@@ -45,9 +45,9 @@
 #define TDStretch_H
 
 #include <stddef.h>
-#include "STTypes.h"
-#include "RateTransposer.h"
-#include "FIFOSamplePipe.h"
+#include "STTypes.hpp"
+#include "RateTransposer.hpp"
+#include "FIFOSamplePipe.hpp"
 
 namespace soundtouch
 {

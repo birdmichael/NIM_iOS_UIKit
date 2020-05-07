@@ -46,7 +46,7 @@
 #ifndef FIFOSampleBuffer_H
 #define FIFOSampleBuffer_H
 
-#include "FIFOSamplePipe.h"
+#include "FIFOSamplePipe.hpp"
 
 namespace soundtouch
 {

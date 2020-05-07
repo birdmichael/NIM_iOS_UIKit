@@ -43,7 +43,7 @@
 #define FIRFilter_H
 
 #include <stddef.h>
-#include "STTypes.h"
+#include "STTypes.hpp"
 
 namespace soundtouch
 {

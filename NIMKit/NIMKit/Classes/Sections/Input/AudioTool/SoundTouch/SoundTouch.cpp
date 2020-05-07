@@ -75,10 +75,10 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "SoundTouch.h"
-#include "TDStretch.h"
-#include "RateTransposer.h"
-#include "cpu_detect.h"
+#include "SoundTouch.hpp"
+#include "TDStretch.hpp"
+#include "RateTransposer.hpp"
+#include "cpu_detect.hpp"
 
 using namespace soundtouch;
     

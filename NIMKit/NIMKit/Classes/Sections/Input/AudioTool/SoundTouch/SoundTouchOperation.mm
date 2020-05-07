@@ -6,8 +6,8 @@
  */
 
 #import "SoundTouchOperation.h"
-#include "SoundTouch.h"
-#include "WaveHeader.h"
+#include "SoundTouch.hpp"
+#include "WaveHeader.hpp"
 #import "CWFlieManager.h"
 #import "CWRecordModel.h"
 
@@ -86,32 +86,5 @@
     
 }
 
-////创建文件存储路径
-//- (NSString *)createSavePath {
-//    //文件名使用 "voiceFile+当前时间的时间戳"
-//    NSString *fileName = [self createFileName];
-//
-//    NSString *documentDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *wavfilepath = [NSString stringWithFormat:@"%@/SoundTouch",documentDir];
-//
-//    NSString *writeFilePath = [NSString stringWithFormat:@"%@/%@.wav",wavfilepath, fileName];
-//    BOOL isExist =  [[NSFileManager defaultManager]fileExistsAtPath:writeFilePath];
-//    if (isExist) {
-//        //如果存在则移除 以防止 文件冲突
-//        NSError *err = nil;
-//        [[NSFileManager defaultManager]removeItemAtPath:writeFilePath error:&err];
-//    }
-//
-//    BOOL isExistDic =  [[NSFileManager defaultManager]fileExistsAtPath:wavfilepath];
-//    if (!isExistDic) {
-//         [[NSFileManager defaultManager] createDirectoryAtPath:wavfilepath withIntermediateDirectories:YES attributes:nil error:nil];
-//    }
-//
-//    return writeFilePath;
-//}
-//
-//- (NSString *)createFileName {
-//    NSString *fileName = [NSString stringWithFormat:@"voiceFile%lld",(long long)[NSDate timeIntervalSinceReferenceDate]];
-//    return fileName;
-//}
+
 @end

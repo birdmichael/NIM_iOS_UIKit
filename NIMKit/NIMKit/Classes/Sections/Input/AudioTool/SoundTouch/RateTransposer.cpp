@@ -42,8 +42,8 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "RateTransposer.h"
-#include "AAFilter.h"
+#include "RateTransposer.hpp"
+#include "AAFilter.hpp"
 
 using namespace soundtouch;
 
