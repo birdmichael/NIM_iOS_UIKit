@@ -12,14 +12,19 @@
 #import "NIMMessageCellProtocol.h"
 #import "NIMSessionConfigurateProtocol.h"
 #import "NIMInputView.h"
+#import "NIMAdvanceMenu.h"
 
-@interface NIMSessionViewController : UIViewController<NIMSessionInteractorDelegate,NIMInputActionDelegate,NIMMessageCellDelegate,NIMChatManagerDelegate,NIMConversationManagerDelegate>
+@interface NIMSessionViewController : UIViewController<NIMSessionInteractorDelegate,NIMInputActionDelegate,NIMMessageCellDelegate,NIMChatManagerDelegate,NIMConversationManagerDelegate,NIMChatExtendManagerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 
 @property (nonatomic, strong)  NIMInputView *sessionInputView;
 
+@property (nonatomic,strong)    NIMAdvanceMenu *advanceMenu;
+
 @property (nonatomic, strong)  NIMSession *session;
+
+@property (nonatomic,weak)    id<NIMSessionInteractor> interactor;
 
 /**
  *  当前当初的菜单所关联的消息
@@ -195,10 +200,19 @@
  */
 - (void)uiUpdateMessage:(NIMMessage *)message;
 
-- (void)onTapMediaItemPicture:(nullable NIMMediaItem *)item;
+/**
+ * UI上添加PIN，SDK中添加了Pin后调用
+ */
+- (void)uiPinMessage:(NIMMessage *)message;
 
-- (void)onTapMediaItemShoot:(nullable NIMMediaItem *)item;
+/**
+ * UI上移除PIN，SDK中移除了Pin后调用
+ */
+- (void)uiUnpinMessage:(NIMMessage *)message;
 
-- (void)onTapMediaItemLocation:(nullable NIMMediaItem *)item;
+/**
+ * 跳转到对应消息
+ */
+- (void)scrollToMessage:(NIMMessage *)message;
 
 @end
