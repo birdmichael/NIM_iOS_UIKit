@@ -69,8 +69,6 @@ typedef NS_ENUM(NSInteger,NIMInputStatus)
 
 @property (nonatomic,assign) NSInteger maxNumberOfInputLines;
 
-@property (nonatomic,strong) NIMGrowingTextView *inputTextView;
-
 - (void)update:(NIMInputStatus)status;
 
 @end

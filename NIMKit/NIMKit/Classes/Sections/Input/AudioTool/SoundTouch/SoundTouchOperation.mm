@@ -8,8 +8,7 @@
 #import "SoundTouchOperation.h"
 #include "SoundTouch.hpp"
 #include "WaveHeader.hpp"
-#import "CWFlieManager.h"
-#import "CWRecordModel.h"
+
 
 @interface SoundTouchOperation ()
 @property (nonatomic, strong) NSData *voicefileData;

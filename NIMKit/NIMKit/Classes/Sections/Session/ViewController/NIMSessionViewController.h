@@ -200,19 +200,10 @@
  */
 - (void)uiUpdateMessage:(NIMMessage *)message;
 
-/**
- * UI上添加PIN，SDK中添加了Pin后调用
- */
-- (void)uiPinMessage:(NIMMessage *)message;
+- (void)onTapMediaItemPicture:(nullable NIMMediaItem *)item;
 
-/**
- * UI上移除PIN，SDK中移除了Pin后调用
- */
-- (void)uiUnpinMessage:(NIMMessage *)message;
+- (void)onTapMediaItemShoot:(nullable NIMMediaItem *)item;
 
-/**
- * 跳转到对应消息
- */
-- (void)scrollToMessage:(NIMMessage *)message;
+- (void)onTapMediaItemLocation:(nullable NIMMediaItem *)item;
 
 @end
