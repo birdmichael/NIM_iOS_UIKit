@@ -110,7 +110,7 @@
     if (!image) {
         image = [UIImage imageNamed:imageName];
     }
-    NSAssert(image != nil, @"nim_emoticonInKit return nil!");
+    NSAssert(image != nil, ([NSString stringWithFormat:@"nim_emoticonInKit %@ return nil!",imageName]));
     return image;
 }
 
