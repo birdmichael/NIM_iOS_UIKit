@@ -24,6 +24,7 @@
 @property (nonatomic,strong)  UIRefreshControl *refreshControl;
 
 @property (nonatomic,strong)  NIMSession  *session;
+@property (nonatomic,assign)  CGFloat  topViewHeight;
 
 @property (nonatomic,strong)  id<NIMSessionConfig> sessionConfig;
 
@@ -119,7 +120,7 @@
     
     CGFloat containerSafeHeight = self.tableView.superview.frame.size.height - safeAreaInsets.bottom;
     
-    rect.size.height = containerSafeHeight - self.inputView.toolBar.nim_height;
+    rect.size.height = containerSafeHeight - self.inputView.toolBar.nim_height - self.topViewHeight;
     
     
     //tableview 的内容 inset
@@ -139,7 +140,7 @@
     visiableHeight = MIN(visiableHeight, rect.size.height);
     
     rect.origin.y    = containerSafeHeight - visiableHeight - self.inputView.nim_height;
-    rect.origin.y    = rect.origin.y > 0? 0 : rect.origin.y;
+    rect.origin.y    = rect.origin.y > self.topViewHeight ? self.topViewHeight : rect.origin.y;
     
     
     BOOL tableChanged = !CGRectEqualToRect(self.tableView.frame, rect);
@@ -279,6 +280,11 @@
 
 - (void)adjustOffset:(NSInteger)row {
     
+}
+
+- (void)changeTopViewHeight:(CGFloat)topViewHeight {
+    self.topViewHeight = topViewHeight;
+    [self resetLayout];
 }
 
 - (void)dismissReplyContent {

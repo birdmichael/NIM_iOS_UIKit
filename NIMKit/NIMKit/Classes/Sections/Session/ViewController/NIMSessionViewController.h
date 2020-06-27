@@ -5,7 +5,7 @@
 //  Created by NetEase.
 //  Copyright (c) 2015年 NetEase. All rights reserved.
 //
-
+@class NIMSessionConfigurator;
 #import <UIKit/UIKit.h>
 #import <NIMSDK/NIMSDK.h>
 #import "NIMSessionConfig.h"
@@ -15,7 +15,7 @@
 #import "NIMAdvanceMenu.h"
 
 @interface NIMSessionViewController : UIViewController<NIMSessionInteractorDelegate,NIMInputActionDelegate,NIMMessageCellDelegate,NIMChatManagerDelegate,NIMConversationManagerDelegate,NIMChatExtendManagerDelegate>
-
+@property (nonatomic,strong, readonly)    NIMSessionConfigurator *configurator;
 @property (nonatomic, strong)  UITableView *tableView;
 
 @property (nonatomic, strong)  NIMInputView *sessionInputView;

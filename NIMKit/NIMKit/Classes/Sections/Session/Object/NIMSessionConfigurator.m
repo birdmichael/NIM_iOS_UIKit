@@ -46,9 +46,9 @@
 
 @interface NIMSessionConfigurator()
 
-@property (nonatomic,strong) NIMSessionInteractorImpl   *interactor;
+//@property (nonatomic,strong) NIMSessionInteractorImpl   *interactor;
 
-@property (nonatomic,strong) NIMSessionTableAdapter     *tableAdapter;
+//@property (nonatomic,strong) NIMSessionTableAdapter     *tableAdapter;
 
 @end
 

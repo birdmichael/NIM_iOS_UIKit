@@ -8,11 +8,14 @@
 
 #import "NIMSessionViewController.h"
 #import "NIMSessionConfigurateProtocol.h"
+#import "NIMSessionTableAdapter.h"
+#import "NIMSessionInteractorImpl.h"
 
 @class NIMSessionViewController;
 
 @interface NIMSessionConfigurator : NSObject
-
+@property (nonatomic,strong) NIMSessionTableAdapter     *tableAdapter;
+@property (nonatomic,strong) NIMSessionInteractorImpl   *interactor;
 - (void)setup:(NIMSessionViewController *)vc;
 
 @end

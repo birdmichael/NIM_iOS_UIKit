@@ -144,8 +144,8 @@
         UIView *view = [self subViewForType:type.integerValue];
         textViewWidth += view.nim_width;
     }
-    textViewWidth += (self.spacing * (self.types.count + 1));
-    self.inputTextView.nim_width  = width  - textViewWidth - 2 * self.textViewPadding;
+    textViewWidth += (self.textViewHorizontalSpacing * (self.types.count + 1));
+    self.inputTextView.nim_width  = width  - textViewWidth - 2 * self.textViewHorizontalPadding;
 }
 
 
@@ -153,7 +153,7 @@
     [super layoutSubviews];
     
     if ([self.types containsObject:@(NIMInputBarItemTypeTextAndRecord)]) {
-        self.inputTextBkgImage.nim_width  = self.inputTextView.nim_width  + 2 * self.textViewPadding;
+        self.inputTextBkgImage.nim_width  = self.inputTextView.nim_width  + 2 * self.textViewHorizontalPadding;
         self.inputTextBkgImage.nim_height = self.inputTextView.nim_height + 2 * self.textViewPadding;
     }
     CGFloat left = 0;
@@ -164,7 +164,7 @@
             [self addSubview:view];
         }
         
-        view.nim_left = left + self.spacing;
+        view.nim_left = left + self.textViewHorizontalSpacing;
         view.nim_top = self.textViewPadding;
         left = view.nim_right;
     }
@@ -337,6 +337,16 @@
     return 3.f;
 }
 
+- (CGFloat)textViewHorizontalPadding
+{
+    return 20.f;
+}
+
+- (CGFloat)textViewHorizontalSpacing
+{
+    return 15.f;
+}
+
 
 @end
 
@@ -350,7 +360,8 @@
 
 - (void)setPlaceHolder:(NSString *)placeHolder
 {
-    self.inputTextView.placeholderAttributedText = [[NSAttributedString alloc] initWithString:placeHolder attributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
+    self.inputTextView.placeholderAttributedText = [[NSAttributedString alloc] initWithString:placeHolder attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:181/255.0 green:183/255.0 blue:188/255.0 alpha:1.0],
+                                                                                                                       NSFontAttributeName: [UIFont systemFontOfSize:16]}];
 }
 
 - (void)insertText:(NSString *)text

@@ -78,6 +78,8 @@
 
 @protocol NIMSessionLayout <NSObject>
 
+- (void)changeTopViewHeight:(CGFloat)topViewHeight;
+
 - (void)update:(NSIndexPath *)indexPath;
 
 - (void)insert:(NSArray *)indexPaths animated:(BOOL)animated;
@@ -103,6 +105,8 @@
 - (void)dismissReplyContent;
 
 - (NSInteger)numberOfRows;
+
+
 
 @end
 
